@@ -14,9 +14,9 @@ machine:
     DOCKER_HOST: unix:///tmp/docker.sock 
 
     ## Specify where to use docker
-    DOCKER_REGISTRY: docker-sandbox.concurtech.net
-    DOCKER_REGISTRY_PUSH: docker-sandbox.concurtech.net
-    DOCKER_PULL_REPO: docker.concurtech.net
+    DOCKER_REGISTRY: <your docker artifact location>
+    DOCKER_REGISTRY_PUSH: <your docker artifact location>
+    DOCKER_PULL_REPO: <your docker pull artifact location>
 
     CONTAINER1: matrix/pws-poc
 
