@@ -1,0 +1,11 @@
+{
+  "CORRELATION_ID_KEY": "concur-correlationid",
+  "LOG_FILE_LOCATION": "/var/log/pws/callouts.log",
+  "LOG_APPLICATION": "PWS",
+  "LOG_CATEGORY": "Callouts",
+  
+  "SERVER_PORT": "5000",
+  
+  "PROXY_SERVER_HOST": "http://seaproxy.concurasp.com",
+  "PROXY_SERVER_PORT": 3128
+}

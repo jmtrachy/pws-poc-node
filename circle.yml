@@ -1,0 +1,37 @@
+## Customize the test machine - add any system dependencies
+machine:
+  ## use node version 6.1.0
+  node:
+    version: 6.1.0
+  ## make sure docker is installed
+  services:
+    - docker
+
+  environment:
+    TAG: v0.1.${CIRCLE_BUILD_NUM}
+
+    ## This uses the docker socket on the host instead of inside the container for caching\performance reasons
+    DOCKER_HOST: unix:///tmp/docker.sock 
+
+    ## Specify where to use docker
+    DOCKER_REGISTRY: docker-sandbox.concurtech.net
+    DOCKER_REGISTRY_PUSH: docker-sandbox.concurtech.net
+    DOCKER_PULL_REPO: docker.concurtech.net
+
+    CONTAINER1: matrix/pws-poc
+
+dependencies:
+  override:
+    ## install any missing required binaries/config
+    - npm update
+
+    - docker login -u ${dockeruser} -p ${dockerpass} -e user@domain.com ${DOCKER_REGISTRY_PUSH}
+    - docker build -t ${DOCKER_REGISTRY_PUSH}/${CONTAINER1} .
+    - set -x && docker tag -f ${DOCKER_REGISTRY_PUSH}/${CONTAINER1}:latest ${DOCKER_REGISTRY_PUSH}/${CONTAINER1}:${TAG}
+    - set -x && docker push ${DOCKER_REGISTRY_PUSH}/${CONTAINER1}:${TAG}
+    
+deployment:
+  rqa:
+    branch: master
+    commands:
+      - ./build/deploy.sh ${TAG} rqa3
