@@ -1,6 +1,8 @@
 # pws-poc-node
 A test replacement of an internal PWS tier - written in js
 
+To initially build: npm install
+
 To run using the local env and no docker container: node src/server.js
 To run using a specified environment and no docker container: export PWS_ENVIRONMENT=environment_name followed by node src/server.js
 
